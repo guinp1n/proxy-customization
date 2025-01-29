@@ -1,0 +1,25 @@
+[versions]
+assertj = "3.27.3"
+hivemq-mqttClient = "1.3.4"
+hivemq-platform = "4.35.0"
+jetbrains-annotations = "26.0.2"
+junit-jupiter = "5.11.3"
+mockserver-neolight = "1.0.9"
+shrinkwrap = "1.2.6"
+testcontainers = "1.20.4"
+
+[libraries]
+assertj = { module = "org.assertj:assertj-core", version.ref = "assertj" }
+hivemq-enterpriseSecurityExtension-customizationSdk = { module = "com.hivemq:hivemq-enterprise-security-extension-customization-sdk", version.ref = "hivemq-platform" }
+hivemq-mqttClient = { module = "com.hivemq:hivemq-mqtt-client", version.ref = "hivemq-mqttClient" }
+jetbrains-annotations = { module = "org.jetbrains:annotations", version.ref = "jetbrains-annotations" }
+mockserverNeoLight-client = { module = "software.xdev.mockserver:client", version.ref = "mockserver-neolight" }
+mockserverNeoLight-testcontainers = { module = "software.xdev.mockserver:testcontainers", version.ref = "mockserver-neolight" }
+shrinkwrap-api = { module = "org.jboss.shrinkwrap:shrinkwrap-api", version.ref = "shrinkwrap" }
+shrinkwrap-impl = { module = "org.jboss.shrinkwrap:shrinkwrap-impl-base", version.ref = "shrinkwrap" }
+testcontainers-hivemq = { module = "org.testcontainers:hivemq", version.ref = "testcontainers" }
+testcontainers-junitJupiter = { module = "org.testcontainers:junit-jupiter", version.ref = "testcontainers" }
+
+[plugins]
+defaults = { id = "io.github.sgtsilvio.gradle.defaults", version = "0.2.0" }
+license = { id = "com.github.hierynomus.license", version = "0.16.1" }

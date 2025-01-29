@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+    Copyright 2024-present HiveMQ GmbH
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+        http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<ese-file-realm
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="ese-file-realm.xsd"
+        version="1">
+    <mqtt>
+        <users>
+            <user>
+                <name>my-user</name>
+                <password>my-password</password>
+                <roles>
+                    <role>internal-role-1</role>
+                    <role>internal-role-2</role>
+                </roles>
+            </user>
+        </users>
+        <roles>
+            <role>
+                <id>internal-role-1</id>
+                <permissions>
+                    <permission>
+                        <topic>internal-role-1</topic>
+                        <qos>ALL</qos>
+                        <activity>ALL</activity>
+                        <shared-subscription>ALL</shared-subscription>
+                        <shared-group>internal-group-1</shared-group>
+                    </permission>
+                </permissions>
+            </role>
+            <role>
+                <id>internal-role-2</id>
+                <permissions>
+                    <permission>
+                        <topic>internal-role-2</topic>
+                        <qos>ALL</qos>
+                        <activity>ALL</activity>
+                        <shared-subscription>ALL</shared-subscription>
+                        <shared-group>internal-group-2</shared-group>
+                    </permission>
+                </permissions>
+            </role>
+            <role>
+                <id>external-role-1</id>
+                <permissions>
+                    <permission>
+                        <topic>external-role-1</topic>
+                        <qos>ALL</qos>
+                        <activity>ALL</activity>
+                        <shared-subscription>ALL</shared-subscription>
+                        <shared-group>external-group-1</shared-group>
+                    </permission>
+                </permissions>
+            </role>
+            <role>
+                <id>external-role-2</id>
+                <permissions>
+                    <permission>
+                        <topic>external-role-2</topic>
+                        <qos>ALL</qos>
+                        <activity>ALL</activity>
+                        <shared-subscription>ALL</shared-subscription>
+                        <shared-group>external-group-2</shared-group>
+                    </permission>
+                </permissions>
+            </role>
+        </roles>
+    </mqtt>
+</ese-file-realm>
