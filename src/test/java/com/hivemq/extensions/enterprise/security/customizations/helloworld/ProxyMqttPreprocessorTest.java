@@ -37,10 +37,10 @@ import java.util.Locale;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 /**
- * @author Mario Schwede
+ * @author Dasha Samkova
  * @since 4.36.0
  */
-class IpAllowlistMqttPreprocessorTest {
+class ProxyMqttPreprocessorTest {
 
     private static final @NotNull String ESE_ID = "hivemq-enterprise-security-extension";
     private static final @NotNull String ESE_NAME = "HiveMQ Enterprise Security Extension";
@@ -50,21 +50,21 @@ class IpAllowlistMqttPreprocessorTest {
             DockerImageName.parse("hivemq/hivemq4").withTag("latest")) //
             .withLogLevel(Level.DEBUG)
             .withLogConsumer(outputFrame -> System.out.print("HIVEMQ: " + outputFrame.getUtf8String()))
-            .withCopyFileToContainer(MountableFile.forClasspathResource("/ip-allowlist-config.xml"),
+            .withCopyFileToContainer(MountableFile.forClasspathResource("/p-ese-config.xml"),
                     ESE_HOME_FOLDER + "/conf/config.xml")
-            .withCopyFileToContainer(MountableFile.forClasspathResource("/ip-allowlist-file-realm.xml"),
+            .withCopyFileToContainer(MountableFile.forClasspathResource("/p-ese-file-realm.xml"),
                     ESE_HOME_FOLDER + "/conf/file-realm.xml")
-            .withCopyToContainer(ipAllowlistMqttPreprocessor(),
+            .withCopyToContainer(proxyMqttPreprocessor(),
                     ESE_HOME_FOLDER +
                             "/customizations/" +
-                            IpAllowlistMqttPreprocessor.class.getSimpleName().toLowerCase(Locale.ROOT) +
+                            ProxyMqttPreprocessor.class.getSimpleName().toLowerCase(Locale.ROOT) +
                             ".jar")
             .withoutPrepackagedExtensions("hivemq-allow-all-extension");
 
-    private static @NotNull Transferable ipAllowlistMqttPreprocessor() {
+    private static @NotNull Transferable proxyMqttPreprocessor() {
         final ByteArrayOutputStream out = new ByteArrayOutputStream();
         ShrinkWrap.create(JavaArchive.class)
-                .addClasses(IpAllowlistMqttPreprocessor.class)
+                .addClasses(ProxyMqttPreprocessor.class)
                 .as(ZipExporter.class)
                 .exportTo(out);
         return Transferable.of(out.toByteArray());
@@ -77,8 +77,6 @@ class IpAllowlistMqttPreprocessorTest {
 
     @Test
     void allowed() throws Exception {
-        // Gateway IP of the docker bridge
-        hivemq.withEnv("ALLOWED_CLIENT_IP", "172.17.0.1");
         hivemq.start();
 
         hivemq.enableExtension(ESE_NAME, ESE_ID);
@@ -88,8 +86,6 @@ class IpAllowlistMqttPreprocessorTest {
 
     @Test
     void notAllowed() throws Exception {
-        // Unknown IP
-        hivemq.withEnv("ALLOWED_CLIENT_IP", "173.17.0.1");
         hivemq.start();
 
         hivemq.enableExtension(ESE_NAME, ESE_ID);

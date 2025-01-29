@@ -29,25 +29,23 @@
     </realms>
     <pipelines>
         <listener-pipeline listener="ALL">
+            <authentication-preprocessors>
+                <custom-preprocessor>
+                    <implementation>
+                        com.hivemq.extensions.enterprise.security.customizations.helloworld.ProxyMqttPreprocessor
+                    </implementation>
+                    <!--<custom-settings>
+                        <custom-setting>
+                            <name>hello</name>
+                            <value>${ENV:HELLO}</value>
+                        </custom-setting>
+                    </custom-settings>-->
+                </custom-preprocessor>
+            </authentication-preprocessors>
             <file-authentication-manager>
                 <realm>file-realm</realm>
             </file-authentication-manager>
-            <authorization-preprocessors>
-                <custom-preprocessor>
-                    <implementation>
-                        com.hivemq.extensions.enterprise.security.customizations.helloworld.ExternalRolesCommonPreprocessor
-                    </implementation>
-                    <custom-settings>
-                        <custom-setting>
-                            <name>rolesEndpoint</name>
-                            <value>${ENV:ROLES_ENDPOINT}</value>
-                        </custom-setting>
-                    </custom-settings>
-                </custom-preprocessor>
-            </authorization-preprocessors>
-            <file-authorization-manager>
-                <realm>file-realm</realm>
-            </file-authorization-manager>
+            <allow-all-authorization-manager/>
         </listener-pipeline>
     </pipelines>
 </enterprise-security-extension>

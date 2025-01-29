@@ -2,7 +2,7 @@
 :hivemq-blog-tools: https://www.hivemq.com/mqtt-toolbox/
 :hivemq-support: https://community.hivemq.com
 
-= HiveMQ Enterprise Security Extension Hello World Customization
+= HiveMQ Enterprise Security Extension Hello Proxy Customization
 
 image:https://img.shields.io/badge/Customization_Type-Demonstration-orange?style=for-the-badge[Extension Type]
 image:https://img.shields.io/github/v/release/hivemq/hivemq-enterprise-security-hello-world-customization?style=for-the-badge[GitHub release (latest by date),link=https://github.com/hivemq/hivemq-enterprise-security-hello-world-customization/releases/latest]
@@ -10,26 +10,23 @@ image:https://img.shields.io/github/license/hivemq/hivemq-enterprise-securirty-h
 
 == Purpose
 
-This project contains two example preprocessor implementations that show how to use the customization SDK for the {hivemq-enterprise-security-docs}[HiveMQ Enterprise Security Extension].
+This project contains an example preprocessor implementation that shows how to use the customization SDK for the {hivemq-enterprise-security-docs}[HiveMQ Enterprise Security Extension].
 
-- The `com.hivemq.extensions.enterprise.security.customizations.helloworld.IpAllowlistMqttPreprocessor` only allows clients with specific IPs to connect. For more insights please see the related test: `com.hivemq.extensions.enterprise.security.customizations.helloworld.IpAllowlistMqttPreprocessorTest`.
-- The `com.hivemq.extensions.enterprise.security.customizations.helloworld.ExternalRolesCommonPreprocessor` merges internal and external retrieved roles for connecting clients. For more insights please see the related test: `com.hivemq.extensions.enterprise.security.customizations.helloworld.ExternalRolesCommonPreprocessorTest`.
+- The `com.hivemq.extensions.enterprise.security.customizations.helloworld.ProxyMqttPreprocessor` only allows clients with mqtt-username matching the proxy information.
 
-== Installing the IpAllowlistMqttPreprocessor
+== Installing the ProxyMqttPreprocessor
 
 * Clone this repository.
 * Run the `./gradlew jar` task from Gradle to build the customization.
-* Copy the `./build/libs/hivemq-enterprise-security-hello-world-customization-4.36.0.jar` file to the  `HIVEMQ_HOME/extensions/hivemq-enterprise-security-extension/customizations` directory.
-* Copy `./src/test/resources/ip-allowlist-config.xml` to `HIVEMQ_HOME/extensions/hivemq-enterprise-security-extension/conf/config.xml`.
-* Copy `./src/test/resources/ip-allowlist-file-realm.xml` to `HIVEMQ_HOME/extensions/hivemq-enterprise-security-extension/conf/file-realm.xml`.
+* Copy the `./build/libs/hivemq-enterprise-security-hello-proxy-customization-4.36.0.jar` file to the  `HIVEMQ_HOME/extensions/hivemq-enterprise-security-extension/customizations` directory.
+* Copy `./src/test/resources/p-ese-config.xml` to `HIVEMQ_HOME/extensions/hivemq-enterprise-security-extension/conf/config.xml`.
+* Copy `./src/test/resources/p-ese-file-realm.xml` to `HIVEMQ_HOME/extensions/hivemq-enterprise-security-extension/conf/file-realm.xml`.
 * Delete the `HIVEMQ_HOME/extensions/hivemq-enterprise-security-extension/DISABLED` file (if there is one).
-* Execute `export HIVEMQ_LOG_LEVEL=debug` to get better insights during testing.
-* Execute `export ALLOWED_CLIENT_IP=127.0.0.1` to allow connecting from the same host.
 * Start HiveMQ.
 
-=== Manually Test Your IpAllowlistMqttPreprocessor
+=== Manually Test Your ProxyMqttPreprocessor
 
-- Connect with an {hivemq-blog-tools}[MQTT client] of your choice from the same host with user `my-user` and password `my-password`.
+- Connect with an {hivemq-blog-tools}[MQTT client] of your choice with user `my-user` and password `my-password`.
 
 == Need Help?
 
@@ -38,5 +35,5 @@ The best place to get in contact is our {hivemq-support}[community forum].
 
 == License
 
-HiveMQ Enterprise Security Extension Hello World Customization is licensed under the `APACHE LICENSE, VERSION 2.0`.
+HiveMQ Enterprise Security Extension Hello Proxy Customization is licensed under the `APACHE LICENSE, VERSION 2.0`.
 A copy of the license can be found link:LICENSE[here].
